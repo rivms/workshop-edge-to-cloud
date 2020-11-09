@@ -8,5 +8,6 @@ Acme Mining Inc. has many remote sites ...
 ## Outline
 In this workshop an IoT solution will be architected and built covering elements from edge to cloud.
 
+0. [Pre-requisites](step-000-getting-started)
 1. [Configuring an edge device](step-001-config-edge-device/)
 2. [Setting up a data pipeline]() 
