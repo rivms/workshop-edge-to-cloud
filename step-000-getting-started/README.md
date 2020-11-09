@@ -21,8 +21,13 @@ A shared Azure Subscription has been setup for attendees. This section describes
 
 |App|Steps|Comments|
 |---|-----|--------|
-|Azure IoT Explorer|[download](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer)|Desktop app for observing IoT Hub instances|
+|[Azure IoT Explorer](#azure-iot-explorer)|[download](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer)|Desktop app for observing IoT Hub instances|
 |Azmsg CLI|[download](https://github.com/rivms/msgtool/releases)|CLI tool, helps with sending and viewing messages|
 |git||Install version for your platform|
+
+
+#### Azure IoT Explorer
+Follow the instructions availabe [here](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer) to download and install. When running the tool the inital screen will appear similar to the following screenshot. 
+![screenshot](assets/azure-iot-explorer.png)
 
 
