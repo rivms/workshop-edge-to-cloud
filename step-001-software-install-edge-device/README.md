@@ -1,9 +1,10 @@
 # Azure IoT Edge Device Software Installation
-An Ubuntu 18.04 vm has been .
+An Ubuntu 18.04 vm has been provisioned in each resource group. The installation steps will be run on this machine via ssh.  
 
 ## Learning Goals
-* Access Azure Portal
-* Awareness of useful development tools
+* Edge device remote access via ssh  
+* Install moby engine
+* Install IoT Edge runtime components
 
 ## Resources
 * [IoT Edge runtime architecture](https://docs.microsoft.com/en-us/azure/iot-edge/iot-edge-runtime)
