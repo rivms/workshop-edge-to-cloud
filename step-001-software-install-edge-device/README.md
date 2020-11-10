@@ -1,5 +1,5 @@
-# Configuring an Azure IoT Edge Device
-A shared Azure Subscription has been setup for attendees. This section describes the steps to access the environment as well as setting up your laptop for the steps that follow.
+# Azure IoT Edge Device Software Installation
+An Ubuntu 18.04 vm has been .
 
 ## Learning Goals
 * Access Azure Portal
