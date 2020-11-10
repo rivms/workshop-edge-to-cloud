@@ -21,7 +21,7 @@ Perform the steps for your linux distribution
 1. [Ubuntu 18.04](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#prerequisites)
 
 ### Install Moby
-The [Moby](https://mobyproject.org/) engine is the only container engine officially supported with Azure IoT Edge
+The [Moby](https://mobyproject.org/) engine is the  officially supported container engine for Azure IoT Edge
 1. [Moby runtime installation steps](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#install-a-container-engine) 
 
 ### Install IoT Edge Security Manager
