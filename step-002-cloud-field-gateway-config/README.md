@@ -60,16 +60,19 @@ Once configured the IoT Edge security daemon will on startup connect to the Azur
 1. The registration id is the edge device identifier that will be seen in IoT Hub. It is recommended that the vm name be used as the registration id
 1.  The symmetric key needs to be derived using the registration id and group enrollment key (also provided in the session)
 ![device key](assets/key-diversification.png)
-1. Run the steps below to derive a device key for the edge device, this string will need to be filled into the config file viewed in a previous step. This derivation process ensures that the group key is not present on the edge device
-```
-sw73iz1OASYcqOG/iyLnu3C7e0PQLvx85JQ0+GyCE1wyPA0SjLl7b2+zVZ+Gxapdk19R36isrs65lS8KyfeBLA==
+1. Run the steps below to derive a device key for the edge device, this string will need to be filled into the config file viewed in a previous step. This derivation process ensures that the group key is not present on the edge device.
+  ```
+  DPSGROUPKEY="<paste provided key>"
+  REGISTRATION_ID=$(hostname)
+  keybytes=$(echo $DPSGROUPKEY | base64 --decode | xxd -p -u -c 1000)
+  echo -n $REGISTRATION_ID | openssl sha256 -mac HMAC -macopt hexkey:$keybytes -binary | base64
+  ```
+  ![derived key](assets/derived-key.gif)
+1. Copy and paste the derived key value to a temporary location for use in a later step in this section
 
-DPSGROUPKEY="<paste provided key>"
-REGISTRATION_ID=$(hostname)
-keybytes=$(echo $DPSGROUPKEY | base64 --decode | xxd -p -u -c 1000)
-echo -n $REGISTRATION_ID | openssl sha256 -mac HMAC -macopt hexkey:$keybytes -binary | base64
-```
-![derived key](assets/derived-key.gif)
+### Update config file
+The config file "/etc/iotedge/config.yaml" will now be updated to use the Azure IoT Hub Device Provisioning to boostrap its configuration and connection to an IoT Hub instance.
+1. 
 
 ### Install Moby
 The [Moby](https://mobyproject.org/) engine is the  officially supported container engine for Azure IoT Edge
