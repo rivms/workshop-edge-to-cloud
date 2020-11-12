@@ -32,7 +32,7 @@ The inital configuration file is located at "/etc/iotedge/config.yaml".
 1. Connect to the virtual machine via ssh. The details for connecting to the virtual machine can be found via the portal. 
 ![ssh](assets/connect-ssh.gif)
 1. The ssh key can be downloaded from the resource url shared at the session
-1. Once connected mount the shared folder by running the commang below. The shared files will be used later in this section 
+1. Once connected mount the shared folder by running the command below. The shared files will be used later in this section 
    ```
    sudo mount -a
    ``` 
@@ -54,13 +54,23 @@ The Azure DPS symmetric key provisioning method will be used. This requires thre
 - A symmetric key derived using the registration id and the group enrollment key
 
 
-Once configured the IoT Edge security daemon will on startup connect to the Azure Device Provisioning Service and be assigned an IoT Hub instance to connect this. This allows at scale provisioning which in this scenario leverages an Azure Function that determines the IoT Hub instance to use. The logic to determine the IoT Hub instance simply examines the edge vms name and uses the numbered suffix to select an IoT Hub instance with a similar suffix.
+Once configured the IoT Edge security daemon will on startup connect to the Azure Device Provisioning Service and be assigned an IoT Hub instance to connect to. This allows at scale provisioning which in this scenario leverages an Azure Function that determines the IoT Hub instance to use. The logic to determine the IoT Hub instance simply examines the edge vms name and uses the numbered suffix to select an IoT Hub instance with a similar suffix.
 
 1. The scope id will be provided in the session
 1. The registration id is the edge device identifier that will be seen in IoT Hub. It is recommended that the vm name be used as the registration id
 1.  The symmetric key needs to be derived using the registration id and group enrollment key (also provided in the session)
 ![device key](assets/key-diversification.png)
-1. Steps to derive key here ...
+1. Run the steps below to derive a device key for the edge device, this string will need to be filled into the config file viewed in a previous step. This derivation process ensures that the group key is not present on the edge device
+```
+sw73iz1OASYcqOG/iyLnu3C7e0PQLvx85JQ0+GyCE1wyPA0SjLl7b2+zVZ+Gxapdk19R36isrs65lS8KyfeBLA==
+
+DPSGROUPKEY="<paste provided key>"
+REGISTRATION_ID=$(hostname)
+keybytes=$(echo $DPSGROUPKEY | base64 --decode | xxd -p -u -c 1000)
+echo -n $REGISTRATION_ID | openssl sha256 -mac HMAC -macopt hexkey:$keybytes -binary | base64
+```
+![derived key](assets/derived-key.gif)
+
 ### Install Moby
 The [Moby](https://mobyproject.org/) engine is the  officially supported container engine for Azure IoT Edge
 1. [Moby runtime installation steps](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#install-a-container-engine) 
