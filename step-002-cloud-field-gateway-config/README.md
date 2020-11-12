@@ -72,35 +72,44 @@ Once configured the IoT Edge security daemon will on startup connect to the Azur
 
 ### Update config file
 The config file "/etc/iotedge/config.yaml" will now be updated to use the Azure IoT Hub Device Provisioning to boostrap its configuration and connection to an IoT Hub instance.
-1. 
+1. The following values are needed
+   - Scope Id for the Azure IoT Hub Device Provisioning Service. This will be provided at the session
+   - Registration Id. This is the value used in deriving the device key. It was selected to be the edge devices host name. Retrieve the value by running the below command in the ssh session
+   ```
+   hostname
+   ```
+   - Derived symmetric key. This is the value saved in the previous step  
+1. Open the config file in a text editor
+   ```
+   sudo nano /etc/iotedge/config.yaml
+   ```
+1. Locate the manual provisioning using a connection string section in the config file
+   ![manual provisioning](assets/manual-provisioning.png)
+1. Comment out the manual provisioning fields as we will be using the Azure IoT Hub Device Provisioning Service configuration section
+   ![commented out](assets/commented-out-manual.png)
+1. Locate the DPS symmetric key provisioning configuration sectinon in the config file
+   ![dps symmetric](assets/dps-symmetric.png)
+1. Uncomment the DPS symmetric key provisioning configuration section and fill in values for the following fields:
+   - scope_id - provided in the session
+   - registration_id - edge device host name
+   - symmetric_key - derived symmetric key from earlier step
+   ![dps config](assets/dps-config.png)
+1. Save the changes and exit the text editor
 
-### Install Moby
-The [Moby](https://mobyproject.org/) engine is the  officially supported container engine for Azure IoT Edge
-1. [Moby runtime installation steps](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#install-a-container-engine) 
-
-### Install IoT Edge Security Manager
-The security manager is comprised of three key components whose primary responsibility from an installation perspective is boostrapping the IoT Edge runtime components
-1. [Installtion steps](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#install-the-iot-edge-security-daemon)
-
-### Check Installation
-At this stage the IoT Edge runtime has been installed but not configured. Errors in the logs are expected so the steps below validate only that the required components are now available for use.
-1. Moby installation check
+### Edge Device Provisioning
+The provisioning process will begin once the IoT Edge service is restarted. The IoT Edge security daemon functions as a client of the Azure IoT Hub Device Provisioning service and will connect to the assigned IoT Hub instance and start the initial IoT Edge modules
+1. Restart the IoT Edge service
 ```
-sudo docker version
+sudo systemctl restart iotedge
 ```
-![Moby Version](assets/moby-version.png)
-1. IoT edge runtime configuration check. A cli tool, iotedge, is provided to assist with querying and validating the state of the install edge runtime. Configuration errors are expected to be reported
-```
-sudo iotedge check
-```
-![iotedge check](assets/iotedge-check.png)
-1. Security daemon status check. The security daemon is currently in a failed state as it's configuration file has not been populated as yet.
-```
-systemctl status iotedge
-```
-![systemctl status](assets/systemctl-iotedge.png)
-1. Security daemon logs. The logs again show that the configuration file, config.yaml, has not been updated.
+2. Inspect the logs for any errors
 ```
 journalctl -u iotedge
 ```
-![journalctl status](assets/journalctl-iotedge.png)
+3. Inspect the status of the IoT Edge service
+```
+systemctl status iotedge
+```
+   ![restart edge](assets/restart-edge.gif)
+1. Successful provisioning will result in a new IoT Edge device being registered with the appropriate IoT Hub instance. This IoT Hub instance will be in the same resource group as the IoT Edge device vm
+![iotedge provisioned](assets/edge-device-provisioned.png)
