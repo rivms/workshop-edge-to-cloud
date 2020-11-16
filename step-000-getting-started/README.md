@@ -42,6 +42,7 @@ Executables for Linux, Windows and OSX have been uploaded to a shared storage ac
 1. In the "workshopsharedst001" pane click the **Containers** tile
 1. In the "Containers" pane click the **resources** container
 1. Navigate to the simulator pane and download the executable for your environment
+1. Move the downloaded executable to the "Labs" folder of the cloned repo
 
 ### Install VS Code and IoT Extensions
 Once installed add the Azure IoT extensions

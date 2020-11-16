@@ -13,10 +13,28 @@ An Ubuntu 18.04 vm has been provisioned in each resource group. The installation
 * [IoT Edge OSS project](https://github.com/Azure/iotedge)
 
 ## Steps
+* [Connect to VM via SSH](#connect-to-vm-via-ssh)
 * [Configure apt repository](#repository-configuration)
 * [Install a container engine](#install-moby)
 * [Install IoT Edge security manager](#install-iot-edge-security-manager)
 * [Check installation](#check-installation)
+
+
+### Connect to VM via SSH
+The ssh key needed to authenticate is provided in the shared storage account **workshopsharedst001** in the **shared-dev-rg** resource group
+1. Navigate to the **ssh** folder
+1. Download the key in the format appropriate for your ssh terminal client such as PuTTY 
+1. Save the downloaded files to the "labs\ssh" folder
+1. The connection URL can be found via the Azure Portal
+1. Navigate to the virtual machine over view. Visit the resource group and then click on the virtual machine name such as "latencyedgedevlab01"
+1. On the virtual machine pane click the **Connect** button at the top of the page
+1. Now click **SSH**, the ssh connection details are show in bullet point 4 such as
+   ```
+   ssh -i <private key path> azureuser@<vm name>.southeastasia.cloudapp.azure.com
+   ```
+1. Use the details above and download private key to connect to the virtual machine. If you experience an issue with the permissions assigned to the private key file the following [question/answer](https://superuser.com/questions/1296024/windows-ssh-permissions-for-private-key-are-too-open) may assist.  
+
+
 ### Repository Configuration
 Perform the steps for your linux distribution
 1. [Ubuntu 18.04](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#prerequisites)
