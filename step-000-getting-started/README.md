@@ -10,7 +10,6 @@ A shared Azure Subscription has been setup for attendees. This section describes
 ## Steps
 * [Clone Repo](#clone-repo)
 * [Access Azure Portal](#access-azure-portal)
-* [Download Tools](#download-tools)
 * [Install Azure IoT Explorer](#azure-iot-explorer)
 * [Download Device Simulator](#download-device-simulator)
 * [Install VS Code and IoT Extensions](#install-vs-code-and-iot-extensions)
