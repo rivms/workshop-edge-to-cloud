@@ -8,10 +8,18 @@ A shared Azure Subscription has been setup for attendees. This section describes
 
 
 ## Steps
+* [Clone Repo](#clone-repo)
 * [Access Azure Portal](#access-azure-portal)
 * [Download Tools](#download-tools)
 * [Install Azure IoT Explorer](#azure-iot-explorer)
-* [Clone Repo](#working-folder)
+
+### Clone Repo
+This repository includes a working folder "labs" that is assumed to be the current folder for executing tools and scripts from the command line. 
+1. Clone this repository to a folder on your development machine
+   ```
+   git clone https://github.com/rivms/workshop-edge-to-cloud.git
+   ```
+1. Change directory to the "labs" folder
 
 ### Access Azure Portal
 1. Visit the [Azure Portal](https://portal.azure.com)
@@ -34,13 +42,7 @@ Follow the instructions availabe [here](https://docs.microsoft.com/en-us/azure/i
 ![screenshot](assets/azure-iot-explorer.png)
 
 
-### Working Folder
-This repository includes a working folder "labs" that is assumed to be the current folder for executing tools and scripts from the command line. 
-1. Clone this repository to a folder on your development machine
-   ```
-   git clone https://github.com/rivms/workshop-edge-to-cloud.git
-   ```
-1. Change directory to the "labs" folder
+
 
 ### VS Code
 Once installed add the Azure IoT extensions
