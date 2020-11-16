@@ -36,8 +36,8 @@ The ssh key needed to authenticate is provided in the shared storage account **w
 
 
 ### Repository Configuration
-Perform the steps for your linux distribution
-1. [Ubuntu 18.04](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#prerequisites)
+The VM needs additional configuration before the edge runtime can be install. Run the steps below via the SSH session
+1. Follow the steps on this documentation page for[Ubuntu 18.04](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#prerequisites)
 
 ### Install Moby
 The [Moby](https://mobyproject.org/) engine is the  officially supported container engine for Azure IoT Edge
