@@ -32,23 +32,24 @@ The inital configuration file is located at "/etc/iotedge/config.yaml".
    ```
    sudo mount -a
    ``` 
-
+   If the mount folder is missing create the folder and re-run the command above
+   ```
+   sudo mkdir -p /mnt/workshop
+   ```
 1. The IoT Edge config file can be viewed using the command below. No changes are needed just yet, browse the file and familiarise yourself with its structure
    ```
    sudo nano /etc/iotedge/config.yaml
    ``` 
+   Press CTRL+X to exit
    ![config yaml](assets/config.png)
 
 
 
 ### Deriving Symmetric Key
-
-
-The Azure DPS symmetric key provisioning method will be used. This requires three pieces of information:
+The provisioning process requires credentials to proceed. This step completes the step of generating a symmetric key. Three pieces of information are required:
 - A scope id
 - A registration id
 - A symmetric key derived using the registration id and the group enrollment key
-
 
 Once configured the IoT Edge security daemon will on startup connect to the Azure Device Provisioning Service and be assigned an IoT Hub instance to connect to. This allows at scale provisioning which in this scenario leverages an Azure Function that determines the IoT Hub instance to use. The logic to determine the IoT Hub instance simply examines the edge vms name and uses the numbered suffix to select an IoT Hub instance with a similar suffix.
 
