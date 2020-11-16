@@ -37,7 +37,7 @@ The ssh key needed to authenticate is provided in the shared storage account **w
 
 ### Repository Configuration
 The VM needs additional configuration before the edge runtime can be install. Run the steps below via the SSH session
-1. Follow the steps on this documentation page for[Ubuntu 18.04](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#prerequisites)
+1. Follow the steps on this documentation page for installing the [pre-requisites for Ubuntu 18.04](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#prerequisites)
 
 ### Install Moby
 The [Moby](https://mobyproject.org/) engine is the  officially supported container engine for Azure IoT Edge
@@ -50,22 +50,22 @@ The security manager is comprised of three key components whose primary responsi
 ### Check Installation
 At this stage the IoT Edge runtime has been installed but not configured. Errors in the logs are expected so the steps below validate only that the required components are now available for use.
 1. Moby installation check
-```
-sudo docker version
-```
-![Moby Version](assets/moby-version.png)
+   ```
+   sudo docker version
+   ```
+   ![Moby Version](assets/moby-version.png)
 1. IoT edge runtime configuration check. A cli tool, iotedge, is provided to assist with querying and validating the state of the install edge runtime. Configuration errors are expected to be reported
-```
-sudo iotedge check
-```
-![iotedge check](assets/iotedge-check.png)
+   ```
+   sudo iotedge check
+   ```
+   ![iotedge check](assets/iotedge-check.png)
 1. Security daemon status check. The security daemon is currently in a failed state as it's configuration file has not been populated as yet.
-```
-systemctl status iotedge
-```
-![systemctl status](assets/systemctl-iotedge.png)
+   ```
+   systemctl status iotedge
+   ```
+   ![systemctl status](assets/systemctl-iotedge.png)
 1. Security daemon logs. The logs again show that the configuration file, config.yaml, has not been updated.
-```
-journalctl -u iotedge
-```
-![journalctl status](assets/journalctl-iotedge.png)
+   ```
+   journalctl -u iotedge
+   ```
+   ![journalctl status](assets/journalctl-iotedge.png)
