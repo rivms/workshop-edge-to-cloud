@@ -12,6 +12,8 @@ A shared Azure Subscription has been setup for attendees. This section describes
 * [Access Azure Portal](#access-azure-portal)
 * [Download Tools](#download-tools)
 * [Install Azure IoT Explorer](#azure-iot-explorer)
+* [Download Device Simulator]
+* [Install VS Code and IoT Extensions]
 
 ### Clone Repo
 This repository includes a working folder "labs" that is assumed to be the current folder for executing tools and scripts from the command line. 
@@ -26,27 +28,23 @@ This repository includes a working folder "labs" that is assumed to be the curre
 ### Access Azure Portal
 1. Visit the [Azure Portal](https://portal.azure.com)
 1. Sign-in using your assigned credentials
-1. You will have access to a single resource group
+1. You will have access to two resource groups
+   - labXX-dev-rg - Resource group for each user with resources to be configured during the lab
+   - shared-dev-rg - Shared resource group with resources such as a storage account containing files and other resources for download
 
-
-### Download Tools
-
-|App|Steps|Comments|
-|---|-----|--------|
-|[Azure IoT Explorer](#azure-iot-explorer)|[download](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer)|Desktop app for observing IoT Hub instances|
-|Azmsg CLI|[Download and save to](https://github.com/rivms/msgtool/releases)|CLI tool, helps with sending and viewing messages|
-|SSH / Putty||SSH client used to access the Edge Device VM|
-|VS Code||IDE for development as well as inspecting Azure resources|
-
-
-#### Azure IoT Explorer
+### Azure IoT Explorer
 Follow the instructions availabe [here](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer) to download and install. When running the tool the inital screen will appear similar to the following screenshot. 
 ![screenshot](assets/azure-iot-explorer.png)
 
+### Download Device Simulator
+Executables for Linux, Windows and OSX have been uploaded to a shared storage account.
+1. Via the Azure Portal navigate to the "shared-dev-rg" resource group
+1. In the "shared-dev-rg" pane click the storage account **workshopsharedst001**
+1. In the "workshopsharedst001" pane click the **Containers** tile
+1. In the "Containers" pane click the **resources** container
+1. Navigate to the simulator pane and download the executable for your environment
 
-
-
-### VS Code
+### Install VS Code and IoT Extensions
 Once installed add the Azure IoT extensions
 1. Download and install [VS Code](https://code.visualstudio.com/download)
 2. Run VS Code and install the [Azure IoT Tools](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools) extension
