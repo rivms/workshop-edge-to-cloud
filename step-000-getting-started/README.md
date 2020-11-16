@@ -12,8 +12,8 @@ A shared Azure Subscription has been setup for attendees. This section describes
 * [Access Azure Portal](#access-azure-portal)
 * [Download Tools](#download-tools)
 * [Install Azure IoT Explorer](#azure-iot-explorer)
-* [Download Device Simulator]
-* [Install VS Code and IoT Extensions]
+* [Download Device Simulator](#download-device-simulator)
+* [Install VS Code and IoT Extensions](#install-vs-code-and-iot-extensions)
 
 ### Clone Repo
 This repository includes a working folder "labs" that is assumed to be the current folder for executing tools and scripts from the command line. 
