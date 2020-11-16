@@ -23,21 +23,17 @@ A just in time provisioning process offers a scalable approach for the configura
 * [Deriving Symmetric Key for an Edge Device](#deriving-symmetric-key)
 * [Install IoT Edge security manager](#install-iot-edge-security-manager)
 * [Check installation](#check-installation)
-### Repository Configuration
-Perform the steps for your linux distribution
-1. [Ubuntu 18.04](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge?tabs=linux#prerequisites)
+
 
 ### Review Cofiguration
 The inital configuration file is located at "/etc/iotedge/config.yaml". 
-1. Connect to the virtual machine via ssh. The details for connecting to the virtual machine can be found via the portal. 
-![ssh](assets/connect-ssh.gif)
-1. The ssh key can be downloaded from the resource url shared at the session
+1. Connect to the virtual machine via ssh. 
 1. Once connected mount the shared folder by running the command below. The shared files will be used later in this section 
    ```
    sudo mount -a
    ``` 
 
-1. The IoT Edge config file can now be viewed using the command below. No changes are needed just yet, browse the file and familiarise yourself with its structure
+1. The IoT Edge config file can be viewed using the command below. No changes are needed just yet, browse the file and familiarise yourself with its structure
    ```
    sudo nano /etc/iotedge/config.yaml
    ``` 
