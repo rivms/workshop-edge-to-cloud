@@ -18,6 +18,8 @@ This repository includes a working folder "labs" that is assumed to be the curre
 1. Clone this repository to a folder on your development machine
    ```
    git clone https://github.com/rivms/workshop-edge-to-cloud.git
+   cd workshop-edge-to-cloud
+   cd labs
    ```
 1. Change directory to the "labs" folder
 
@@ -32,7 +34,7 @@ This repository includes a working folder "labs" that is assumed to be the curre
 |App|Steps|Comments|
 |---|-----|--------|
 |[Azure IoT Explorer](#azure-iot-explorer)|[download](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer)|Desktop app for observing IoT Hub instances|
-|Azmsg CLI|[download](https://github.com/rivms/msgtool/releases)|CLI tool, helps with sending and viewing messages|
+|Azmsg CLI|[Download and save to](https://github.com/rivms/msgtool/releases)|CLI tool, helps with sending and viewing messages|
 |SSH / Putty||SSH client used to access the Edge Device VM|
 |VS Code||IDE for development as well as inspecting Azure resources|
 
