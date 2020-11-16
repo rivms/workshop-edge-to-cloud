@@ -32,6 +32,7 @@ The ssh key needed to authenticate is provided in the shared storage account **w
    ```
    ssh -i <private key path> azureuser@<vm name>.southeastasia.cloudapp.azure.com
    ```
+   ![ssh](assets/connect-ssh.gif)
 1. Use the details above and download private key to connect to the virtual machine. If you experience an issue with the permissions assigned to the private key file the following [question/answer](https://superuser.com/questions/1296024/windows-ssh-permissions-for-private-key-are-too-open) may assist.  
 
 
