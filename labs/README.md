@@ -1,0 +1,1 @@
+Use this as the working folder for downloaded resources, certificates and scripts.

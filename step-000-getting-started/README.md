@@ -4,26 +4,29 @@ A shared Azure Subscription has been setup for attendees. This section describes
 
 ## Learning Goals
 * Access Azure Portal
-* Awareness of useful development tools
+* Download tools
 
 
 ## Steps
 * [Access Azure Portal](#access-azure-portal)
-* [Install Tools](#install-tools)
+* [Download Tools](#download-tools)
+* [Install Azure IoT Explorer](#azure-iot-explorer)
+* [Clone Repo](#working-folder)
 
 ### Access Azure Portal
 1. Visit the [Azure Portal](https://portal.azure.com)
 1. Sign-in using your assigned credentials
-1. You will have access to a resource group with a name such as a latency01-dev-rg
+1. You will have access to a single resource group
 
 
-### Install Tools
+### Download Tools
 
 |App|Steps|Comments|
 |---|-----|--------|
 |[Azure IoT Explorer](#azure-iot-explorer)|[download](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer)|Desktop app for observing IoT Hub instances|
 |Azmsg CLI|[download](https://github.com/rivms/msgtool/releases)|CLI tool, helps with sending and viewing messages|
-|git||Install version for your platform|
+|SSH / Putty||SSH client used to access the Edge Device VM|
+|VS Code||IDE for development as well as inspecting Azure resources|
 
 
 #### Azure IoT Explorer
@@ -31,3 +34,15 @@ Follow the instructions availabe [here](https://docs.microsoft.com/en-us/azure/i
 ![screenshot](assets/azure-iot-explorer.png)
 
 
+### Working Folder
+This repository includes a working folder "labs" that is assumed to be the current folder for executing tools and scripts from the command line. 
+1. Clone this repository to a folder on your development machine
+   ```
+   git clone https://github.com/rivms/workshop-edge-to-cloud.git
+   ```
+1. Change directory to the "labs" folder
+
+### VS Code
+Once installed add the Azure IoT extensions
+1. Download and install [VS Code](https://code.visualstudio.com/download)
+2. Run VS Code and install the [Azure IoT Tools](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools) extension
