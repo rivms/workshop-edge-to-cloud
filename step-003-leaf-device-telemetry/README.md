@@ -22,7 +22,7 @@ In this implementation the IoT Edge device services as a field gateway, more spe
 * [Register a leaf device](#register-a-leaf-device)
 * [Configure Leaf Device Simulator](#configure-leaf-device-simulator)
 * [Run Leaf Device Simulator](#run-leaf-device-simulator)
-* [Viewing Telemetry](#viewing-telemetry)
+* [Persisting Telemetry](#persisting-telemetry)
 
 ### Register a leaf device 
 The IoT Hub instace manages both Azure IoT edge devices and leaf devices (devices that connect to an Azure IoT Edge device). To get started a leaf device needs to be registered for the simulated device
@@ -103,14 +103,32 @@ The simulator is now publishing telemetry to the IoT Edge device which is routin
 
 
 ### Persisting Telemetry
-There are multiple avenues for processing and storing telemetry arriving at the IoT Hub instance. In this section we will route telemetry from this IoT Hub instance to a shared Event Hub instance. The shared telemetry will then be ingested by a shared Time Series Insights instance
-1. Route telemetry from your assigned IoT Hub instance to the shared event hub. From the overview pane of your assigned IoT Hub instance click the **Message Routing** link under the **Messaging** left hand menu 
-1. Create a custom endpoint to route messages to. This endpoint will be associated with the Event Hubs instance that will receive the telemetry. Click **Custom endpoints** then **+ Add** and select **Event hubs**
-   ![custom endpoint](assets/custom-endpoint.png)
-1. Fill in the following values before clicking create
-   - Endpoint name - **tsieventhub**
-   - Event hub namespace - Select **telemetryaggregatorehns01**
-   - Event hub instance - Select **tsieh**
-   Click the **Create** button to create the endpoint
-1. On the **Routes** tab click **+ Add** to create a new route using the values as shown. This route will send all telemetry received by this IoT Hub instance to the custom endpoint. Click **Save** to save the route
-   ![custom route](assets/evthubroute.png)
+There are multiple avenues for processing and storing telemetry arriving at the IoT Hub instance. In this section we will route telemetry from this IoT Hub instance to a shared Event Hub instance. The shared telemetry will then be ingested by a shared Time Series Insights instance. Telemetry will be enriched using an IoT Hub route and then transported via Event Grid
+1. Enrich the telemetry from the simulator by adding a "site" property to the incoming telemetry
+1. Navigate to the overview pane for your assigned IoT Hub instance
+1. Click **Events** on the left-hand menu pane
+1. On the **Events** pane click the **+ Event Subscription** link
+1. This form gathers value that will be used to create:
+   - A system topic that the IoT Hub instance will route telemetry to
+   - A subscription that provides an endpoint for handlers to subscribe to the events raised when telemetry arrives
+   - A filter that specifies the event types of interest
+1. Fill out the form with the following values:
+   - Event Subscription Name - labXXevtgridsub, replacing XX with your assigned user suffix
+   - System Topic Name - labXXtelemetrytopic, replacing XX with your assigned user suffix
+   - Filter to Event Types - select only **Device Telemetry**
+   - Endpoint Type - Azure Function
+1. For the Endpoint field, select the Azure Function as shown in the screenshot and click **Confirm Selection**
+   ![select function](assets/select-azure-function.png)
+1. The completed should look similar to the screenshot. Click **Create** to setup the Event Grid topic and subscription
+   ![create event](assets/create-event.png)
+1. The event subscription has been created.
+1. Navigate to the overview pane for your assigned IoT Hub instance. Click the **Message Routing** under the **Messaging** section on the left-hand menu. 
+1. Note that a route has been created to the Event Grid endpoint. 
+1. Click the **Encrich messages** link to open up the message enrichment form. Add a new enrichment rule that will add a property of name "site" to all messages going to the event grid endpoint. Click **Apply** to save the enrichment.
+   - Name - "site"
+   - Value - "latencydevlabXX" where XX is the suffix for your user login
+   - Endpoints - "eventgrid"
+   ![enrichment](assets/enrich-message.png)
+1. At this stage telemetry will be triggering the Azure function which will be writing transformed messages to the shared Event Hub
+1. New telemetry can be viewed by navigating to the Time Series Insights instance
+
