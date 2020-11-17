@@ -58,6 +58,7 @@ Once configured the IoT Edge security daemon will on startup connect to the Azur
 1.  The symmetric key needs to be derived using the registration id and group enrollment key (also provided in the session)
 ![device key](assets/key-diversification.png)
 1. Run the steps below to derive a device key for the edge device, this string will need to be filled into the config file viewed in a previous step. This derivation process ensures that the group key is not present on the edge device.
+1. The value for **DPSGROUPKEY** can be found in the **dps** folder of the shared storage account.
   ```
   DPSGROUPKEY="<paste provided key>"
   REGISTRATION_ID=$(hostname)
@@ -70,7 +71,7 @@ Once configured the IoT Edge security daemon will on startup connect to the Azur
 ### Update config file
 The config file "/etc/iotedge/config.yaml" will now be updated to use the Azure IoT Hub Device Provisioning to boostrap its configuration and connection to an IoT Hub instance.
 1. The following values are needed
-   - Scope Id for the Azure IoT Hub Device Provisioning Service. This will be provided at the session
+   - Scope Id for the Azure IoT Hub Device Provisioning Service. This value can be found in the **dps** folder of the shared storage account
    - Registration Id. This is the value used in deriving the device key. It was selected to be the edge devices host name. Retrieve the value by running the below command in the ssh session
    ```
    hostname
@@ -84,11 +85,11 @@ The config file "/etc/iotedge/config.yaml" will now be updated to use the Azure 
    ```
    sudo nano /etc/iotedge/config.yaml
    ```
-1. Locate the manual provisioning using a connection string section in the config file
+1. Locate the "Manual provisioning configuration using a connection string" section in the config file
    ![manual provisioning](assets/manual-provisioning.png)
 1. Comment out the manual provisioning fields as we will be using the Azure IoT Hub Device Provisioning Service configuration section
    ![commented out](assets/commented-out-manual.png)
-1. Locate the DPS symmetric key provisioning configuration sectinon in the config file
+1. Locate the "DPS symmetric key provisioning configuration" section in the config file
    ![dps symmetric](assets/dps-symmetric.png)
 1. Uncomment the DPS symmetric key provisioning configuration section and fill in values for the following fields:
    - scope_id - provided in the session
@@ -99,7 +100,7 @@ The config file "/etc/iotedge/config.yaml" will now be updated to use the Azure 
    ![hostname config](assets/hostname-config.png)
 1. Replace the current value with fully qualified domain name of the vm.
    ![fqdn config](assets/fqdn-config.png)
-1. Save the changes and exit the text editor
+1. Save the changes and exit the text editor. If using the nano editor this is done by pressing **CTRL+X Y Enter**
 
 ### Edge Device Provisioning
 The provisioning process will begin once the IoT Edge service is restarted. The IoT Edge security daemon functions as a client of the Azure IoT Hub Device Provisioning service and will connect to the assigned IoT Hub instance and start the initial IoT Edge modules
@@ -129,7 +130,7 @@ At this stage the edge device has been provisioned with connectivity to IoT Hub 
 ![module config](assets/module-config.png)
 1. Verify lack of connectivity by running the following from your development machine, replacing the fully qualified domain name for your IoT Edge Device
    ```
-   openssl_client -connect <fqdn>:8883
+   openssl s_client -connect <fqdn>:8883
    ```
 2. An error message is expected
    ![openssl error](assets/openssl-client-failure.png)
@@ -143,7 +144,7 @@ At this stage the edge device has been provisioned with connectivity to IoT Hub 
    ![edge hub container](assets/edgehubcontainer.png)
 1. From your development machine re-run the connectivity test
    ```
-   openssl_client -connect <fqdn>:8883
+   openssl s_client -connect <fqdn>:8883
    ```
    A connection will be established but take note of the final lines of output, the certificate chain cannot be verified
    ![openssl chain fail](assets/openssl-cert-fail.png)
@@ -197,7 +198,7 @@ In the interest of time test certificates have been pre-created viz., a root ca 
    ```
 1. From your development machine re-run the connectivity test
    ```
-   openssl_client -connect <fqdn>:8883
+   openssl s_client -connect <fqdn>:8883
    ```
    A connection will be established but take note of the final lines of output, the certificate chain cannot be verified but the certificate chain now reflects the newly configured certificates. 
    ![openssl new fail](assets/openssl-cert-chain-new-fail.png)
