@@ -7,16 +7,14 @@ In this implementation the IoT Edge device services as a field gateway, more spe
 - Communicating json payload from leaf to edge and finally routing this content to the IoT Hub instance
 - Persisting the time series data in the cloud 
 
-
 ## Learning Goals
 * Leaf device authentication  
 * CA certification configuration
 * Routing of telemetry
 * Storing time series data
 
-
 ## Resources
-* dd
+* 
 
 ## Steps
 * [Register a leaf device](#register-a-leaf-device)
