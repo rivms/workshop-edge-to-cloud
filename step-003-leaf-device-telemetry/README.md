@@ -104,3 +104,13 @@ The simulator is now publishing telemetry to the IoT Edge device which is routin
 
 ### Persisting Telemetry
 There are multiple avenues for processing and storing telemetry arriving at the IoT Hub instance. In this section we will route telemetry from this IoT Hub instance to a shared Event Hub instance. The shared telemetry will then be ingested by a shared Time Series Insights instance
+1. Route telemetry from your assigned IoT Hub instance to the shared event hub. From the overview pane of your assigned IoT Hub instance click the **Message Routing** link under the **Messaging** left hand menu 
+1. Create a custom endpoint to route messages to. This endpoint will be associated with the Event Hubs instance that will receive the telemetry. Click **Custom endpoints** then **+ Add** and select **Event hubs**
+   ![custom endpoint](assets/custom-endpoint.png)
+1. Fill in the following values before clicking create
+   - Endpoint name - **tsieventhub**
+   - Event hub namespace - Select **telemetryaggregatorehns01**
+   - Event hub instance - Select **tsieh**
+   Click the **Create** button to create the endpoint
+1. On the **Routes** tab click **+ Add** to create a new route using the values as shown. This route will send all telemetry received by this IoT Hub instance to the custom endpoint. Click **Save** to save the route
+   ![custom route](assets/evthubroute.png)
