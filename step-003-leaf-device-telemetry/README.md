@@ -69,3 +69,8 @@ The simulator is now configured to send telemetry to the IoT Edge device, specif
    ```
    .\azmsg.exe iothub simulate-device --device-type temperature_pair
    ```
+   ![azmsg tls error](assets/azmsg-tls-error.png)
+1. The error shown is due to the root ca authority not being trusted. The simulator has a commandline switch that can be used to provide the root certificate to be trusted. Run the command from the "labs" folder
+   ```
+   .\azmsg.exe iothub simulate-device --device-type temperature_pair --ca-file .\certs\pki_iot_rootca_ca.pem" 
+   ```
