@@ -22,6 +22,7 @@ In this implementation the IoT Edge device services as a field gateway, more spe
 * [Register a leaf device](#register-a-leaf-device)
 * [Configure Leaf Device Simulator](#configure-leaf-device-simulator)
 * [Run Leaf Device Simulator](#run-leaf-device-simulator)
+* [Viewing Telemetry](#viewing-telemetry)
 
 ### Register a leaf device 
 The IoT Hub instace manages both Azure IoT edge devices and leaf devices (devices that connect to an Azure IoT Edge device). To get started a leaf device needs to be registered for the simulated device
@@ -78,3 +79,28 @@ The simulator is now configured to send telemetry to the IoT Edge device, specif
    ![cert-install-dialog](assets/ca-cert-warn.png)
 1. Once installed the simulator will display the body of the messages sent to the edge device
    ![simulator telemetry](assets/azmsg-telemetry.png)
+
+### Viewing Telemetry
+The simulator is now publishing telemetry to the IoT Edge device which is routing telemetry to IoT Hub. The routing of telemetry to IoT Hub is *not* automatic and is not a requirement to develop solutions using the Azure IoT Edge Runtime. In this section we will confirm that the route is configured, view the telemetry received by IoT Hub and examine stats.
+1. Confirm that the edgeHub module has an appropriate route. The routes are configured using the module twin capability of IoT Hub
+1. Navigate to the **overview** pane for the IoT Hub in your assigned resource group
+1. In the left menu click **Iot Edge** under the **Automatic Device Management** section
+1. On the **IoT Edge** pane click the **Device ID** for the IoT Edge device. The pane for the IoT Edge device shows the list of deployed modules
+   ![edge modules](assets/edge-modules.png)
+1. Click the "$edgeHub" module to open the module details pane. Click the **Module Identity Twin** link at the top of the page to view the module twin for the edgeHub
+   ![edgehub module details](assets/edgehub-module-details.png)
+1. Locate the properties attribute to view the configured routes
+   ![edgehub routes](assets/edgehub-module-route.png)
+1. If the route shown exists we can confirm the route. This route forwards all messages "/messages/*" received by the edgeHub to the "$upstream" sink which is a reserved destination that maps to the IoT Hub instance associated with the edge device
+1. We'll be using Azure IoT Explorer to view the telemetry routed to IoT Hub. Alternatively you can use the Azure IoT Tools extension for VS Code
+1. Launch Azure IoT Explorer and click on **IoT Hubs** in the left menu pane. On the right pane click **+ Add connection**
+1. The **Add connection string** dialog appears. The connection string for the IoT Hub instance to monitor can be found by navigating to the **overview** pane for the IoT Hub instance, click on **Shared access policies** under the **Settings** left-hand menu
+1. Click the **iothubowner** policy and in the fly-out pane click the eye icon and copy the "Connection string-primary key". This is the connection string that should be pasted into Azure IoT Explorer.
+1. Click **Save** to setup the connection in Azure IoT Explorer
+   ![iot explorer](assets/iot-explorer-connection-string.png)
+1. A list of devices will be shown. Click the leaf device "devicesimulator" then **Telemetry** from the left-hand menu. Clck the **Start** button to begin observing telemetry received from the leaf device by the IoT Hub instance.
+   ![iot explorer telemetry](assets/iot-explorer-telemetry.png)
+
+
+### Persisting Telemetry
+There are multiple avenues for processing and storing telemetry arriving at the IoT Hub instance. In this section we will route telemetry from this IoT Hub instance to a shared Event Hub instance. The shared telemetry will then be ingested by a shared Time Series Insights instance
