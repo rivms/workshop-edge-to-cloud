@@ -8,3 +8,4 @@ In this workshop an IoT solution will be architected and built creating an IoT d
 1. [Install edge runtime software](step-001-software-install-edge-device/)
 1. [Cloud and field gateway configuration](step-002-cloud-field-gateway-config) 
 1. [Building an IoT data pipeline](step-003-leaf-device-telemetry) 
+1. [Deploy and Invoke Custom Module](step-004-custom-module)
