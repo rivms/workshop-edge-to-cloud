@@ -31,6 +31,9 @@ This repository includes a working folder "labs" that is assumed to be the curre
    - labXX-dev-rg - Resource group for each user with resources to be configured during the lab
    - shared-dev-rg - Shared resource group with resources such as a storage account containing files and other resources for download
 
+### SSH Client
+A ssh client will be used to remotely access the edge device. There are numerous clients available but if you don't have one installed you could use [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+
 ### Azure IoT Explorer
 Follow the instructions availabe [here](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer) to download and install. When running the tool the inital screen will appear similar to the following screenshot. 
 ![screenshot](assets/azure-iot-explorer.png)
