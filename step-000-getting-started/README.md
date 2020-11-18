@@ -10,7 +10,7 @@ A shared Azure Subscription has been setup for attendees. This section describes
 ## Steps
 * [Clone Repo](#clone-repo)
 * [Access Azure Portal](#access-azure-portal)
-* [SSH Client](#ssh-client)
+* [SSH Client and OpenSSL](#ssh-client-and-openssl)
 * [Install Azure IoT Explorer](#azure-iot-explorer)
 * [Download Device Simulator](#download-device-simulator)
 * [Install VS Code and IoT Extensions](#install-vs-code-and-iot-extensions)
@@ -32,8 +32,10 @@ This repository includes a working folder "labs" that is assumed to be the curre
    - labXX-dev-rg - Resource group for each user with resources to be configured during the lab
    - shared-dev-rg - Shared resource group with resources such as a storage account containing files and other resources for download
 
-### SSH Client
+### SSH Client and OpenSSL
 A ssh client will be used to remotely access the edge device. There are numerous clients available but if you don't have one installed you could use [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or the Azure Bastion service. 
+
+OpenSSL will be used as a commandline tool to validate the certificate setup. The are numerous builds but if you don't have one installed you could select one to [download from here](https://wiki.openssl.org/index.php/Binaries)
 
 ### Azure IoT Explorer
 Follow the instructions availabe [here](https://docs.microsoft.com/en-us/azure/iot-pnp/howto-use-iot-explorer) to download and install. When running the tool the inital screen will appear similar to the following screenshot. 
